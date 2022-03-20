@@ -43,10 +43,18 @@ function movePlayer(keyPress, keys) {
 
   if (keyPress[keys.W]) {
     player.css('top', pos - 10);
+
+    if (pos <= 0) {
+      player.css('top', pos + 10);
+    }
   }
 
   if (keyPress[keys.S]) {
     player.css('top', pos + 10);
+
+    if (pos >= 434) {
+      player.css('top', pos - 10);
+    }
   }
 
   if (keyPress[keys.D]) {
