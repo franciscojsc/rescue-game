@@ -10,8 +10,8 @@ function start() {
 
   let game = {};
 
-  let velocity = 5;
-  // let positionY = parseInt(Math.random() * 334);
+  const VELOCITY_ENEMY_1 = 5;
+  const VELOCITY_ENEMY_2 = 3;
 
   const keys = {
     W: 87,
@@ -32,7 +32,8 @@ function start() {
   game.timer = setInterval(() => {
     moveBackground();
     movePlayer(game.keyPress, keys);
-    moveEnemy1(velocity);
+    moveEnemy1(VELOCITY_ENEMY_1);
+    moveEnemy2(VELOCITY_ENEMY_2);
   }, 30);
 }
 
@@ -80,5 +81,16 @@ function moveEnemy1(velocity) {
     posY = parseInt(Math.random() * 334);
     enemy.css('left', 694);
     enemy.css('top', posY);
+  }
+}
+
+function moveEnemy2(velocity) {
+  let enemy = $('#inimigo2');
+  let posX = parseInt(enemy.css('left'));
+
+  enemy.css('left', posX - velocity);
+
+  if (posX <= 0) {
+    enemy.css('left', 775);
   }
 }
