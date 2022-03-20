@@ -12,6 +12,7 @@ function start() {
 
   const VELOCITY_ENEMY_1 = 5;
   const VELOCITY_ENEMY_2 = 3;
+  const VELOCITY_FRIEND = 1;
 
   const keys = {
     W: 87,
@@ -34,6 +35,7 @@ function start() {
     movePlayer(game.keyPress, keys);
     moveEnemy1(VELOCITY_ENEMY_1);
     moveEnemy2(VELOCITY_ENEMY_2);
+    moveFriend(VELOCITY_FRIEND);
   }, 30);
 }
 
@@ -92,5 +94,17 @@ function moveEnemy2(velocity) {
 
   if (posX <= 0) {
     enemy.css('left', 775);
+  }
+}
+
+function moveFriend(velocity) {
+  let friend = $('#amigo');
+  let posX = parseInt(friend.css('left'));
+  console.log(posX);
+
+  friend.css('left', posX + velocity);
+
+  if (posX > 906) {
+    friend.css('left', 0);
   }
 }
