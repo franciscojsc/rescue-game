@@ -10,6 +10,9 @@ function start() {
 
   let game = {};
 
+  let velocity = 5;
+  // let positionY = parseInt(Math.random() * 334);
+
   const keys = {
     W: 87,
     S: 83,
@@ -29,6 +32,7 @@ function start() {
   game.timer = setInterval(() => {
     moveBackground();
     movePlayer(game.keyPress, keys);
+    moveEnemy1(velocity);
   }, 30);
 }
 
@@ -58,5 +62,23 @@ function movePlayer(keyPress, keys) {
   }
 
   if (keyPress[keys.D]) {
+  }
+}
+
+function moveEnemy1(velocity) {
+  let enemy = $('#inimigo1');
+  let posX = parseInt(enemy.css('left'));
+  let posY =
+    parseInt(enemy.css('top')) > 0
+      ? parseInt(enemy.css('top'))
+      : parseInt(Math.random() * 334);
+
+  enemy.css('left', posX - velocity);
+  enemy.css('top', posY);
+
+  if (posX <= 0) {
+    posY = parseInt(Math.random() * 334);
+    enemy.css('left', 694);
+    enemy.css('top', posY);
   }
 }
