@@ -65,6 +65,7 @@ function movePlayer(keyPress, keys) {
   }
 
   if (keyPress[keys.D]) {
+    shoot();
   }
 }
 
@@ -100,11 +101,41 @@ function moveEnemy2(velocity) {
 function moveFriend(velocity) {
   let friend = $('#amigo');
   let posX = parseInt(friend.css('left'));
-  console.log(posX);
 
   friend.css('left', posX + velocity);
 
   if (posX > 906) {
     friend.css('left', 0);
+  }
+}
+
+let userCanShoot = true;
+let timeShoot = null;
+
+function shoot() {
+  if (userCanShoot) {
+    userCanShoot = false;
+
+    let posTop = parseInt($('#jogador').css('top'));
+    let posX = parseInt($('#jogador').css('left'));
+    let shootX = posX + 190;
+    let shootTop = posTop + 37;
+    $('#fundoGame').append("<div id='disparo'><div/>");
+    $('#disparo').css('top', shootTop);
+    $('#disparo').css('left', shootX);
+
+    timeShoot = setInterval(execShoot, 30);
+  }
+
+  function execShoot() {
+    posX = parseInt($('#disparo').css('left'));
+    $('#disparo').css('left', posX + 15);
+
+    if (posX > 900) {
+      window.clearInterval(timeShoot);
+      timeShoot = null;
+      $('#disparo').remove();
+      userCanShoot = true;
+    }
   }
 }
